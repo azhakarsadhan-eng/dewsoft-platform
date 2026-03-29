@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="logo">Admin</div>
+      <nav>
+        <a href="#" class="nav-link active">Dashboard</a>
+        <a href="#leads" class="nav-link">Leads</a>
+        <a href="#settings" class="nav-link">Settings</a>
+      </nav>
+      <button id="logout" class="btn ghost">Logout</button>
+    </aside>
+
+    <main class="main">
+      <header class="page-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p>Manage users, leads, and payments in one place.</p>
+        </div>
+      </header>
+
+      <section class="cards">
+        <div class="card">
+          <h3>Total Users</h3>
+          <p id="total-users">0</p>
+        </div>
+        <div class="card">
+          <h3>Total Leads</h3>
+          <p id="total-leads">0</p>
+        </div>
+        <div class="card">
+          <h3>Total Payments</h3>
+          <p id="total-payments">0</p>
+        </div>
+      </section>
+
+      <section id="leads" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>Lead Management</h2>
+            <p>Add and manage incoming leads.</p>
+          </div>
+        </div>
+        <form id="lead-form" class="form-grid">
+          <label>
+            Name
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+          <label>
+            Phone Number
+            <input type="tel" name="phone" autocomplete="tel" required />
+          </label>
+          <label>
+            Transaction ID (optional)
+            <input type="text" name="transactionId" autocomplete="off" />
+          </label>
+          <button type="submit" class="btn primary">Add Lead</button>
+          <p id="lead-error" class="error" role="alert"></p>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>Leads</h2>
+            <p>Latest leads captured from the system.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Transaction ID</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="lead-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>Contacts</h2>
+            <p>Callback requests and messages.</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Message</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="contact-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="settings" class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>Settings</h2>
+            <p>Update your admin preferences.</p>
+          </div>
+        </div>
+        <p class="muted">Settings are coming soon.</p>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

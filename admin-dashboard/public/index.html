@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="auth-body">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="logo">Admin</div>
+      <h1>Sign in</h1>
+      <p>Use your admin credentials to access the dashboard.</p>
+    </div>
+    <form id="login-form" class="auth-form">
+      <label>
+        Username
+        <input type="text" name="username" autocomplete="username" required />
+      </label>
+      <label>
+        Password
+        <input type="password" name="password" autocomplete="current-password" required />
+      </label>
+      <button type="submit" class="btn primary">Login</button>
+      <p id="login-error" class="error" role="alert"></p>
+    </form>
+  </div>
+  <script src="login.js"></script>
+</body>
+</html>

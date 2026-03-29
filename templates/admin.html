@@ -1,0 +1,108 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DewSoft Admin Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body class="admin-page">
+  <header class="admin-header">
+    <div class="brand">
+      <span class="brand-mark">NM</span>
+      <div>
+        <div class="brand-title">Success Journey Network</div>
+        <div class="brand-sub">Admin Dashboard</div>
+      </div>
+    </div>
+    <div class="admin-actions">
+      <a class="btn outline" href="/">Back to Website</a>
+      <button class="btn primary" id="refresh-data">Refresh Data</button>
+    </div>
+  </header>
+
+  <section class="admin-section">
+    <div class="section-header">
+      <p class="eyebrow">Overview</p>
+      <h2>Recruitment performance at a glance.</h2>
+      <p class="section-lead">Track daily, weekly, and monthly activity with a live lead list.</p>
+    </div>
+
+    <div class="admin-grid" id="stat-grid">
+      <div class="stat-card">
+        <p class="muted">Total Contacts</p>
+        <div class="value" data-stat="total">0</div>
+      </div>
+      <div class="stat-card">
+        <p class="muted">Joined</p>
+        <div class="value" data-stat="joined">0</div>
+      </div>
+      <div class="stat-card">
+        <p class="muted">Daily Follow Ups</p>
+        <div class="value" data-stat="daily_follow">0</div>
+      </div>
+      <div class="stat-card">
+        <p class="muted">Weekly Follow Ups</p>
+        <div class="value" data-stat="weekly_follow">0</div>
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top: 28px;">
+      <p class="eyebrow">Site Settings</p>
+      <h2>Update posters and contact info.</h2>
+      <p class="section-lead">These changes appear instantly on the main website.</p>
+    </div>
+
+    <form class="panel form" id="settings-form">
+      <label>
+        Official Website URL
+        <input type="url" name="official_url" placeholder="https://example.com" autocomplete="url" />
+      </label>
+      <label>
+        Phone Number
+        <input type="text" name="phone" placeholder="+91 90000 00000" autocomplete="tel" />
+      </label>
+      <label>
+        Support Email
+        <input type="email" name="email" placeholder="support@successjourney.in" autocomplete="email" />
+      </label>
+      <label>
+        WhatsApp Link
+        <input type="url" name="whatsapp" placeholder="https://wa.me/919000000000" autocomplete="url" />
+      </label>
+      <label class="full">
+        Poster Image URLs (comma separated)
+        <textarea name="posters" rows="3" placeholder="https://.../poster1.jpg, https://.../poster2.jpg" autocomplete="off"></textarea>
+      </label>
+      <div class="upload-zone" id="upload-zone">
+        <input type="file" id="poster-files" accept="image/*" multiple />
+        <div>
+          <p class="upload-title">Drag & drop posters here</p>
+          <p class="muted">Or click to upload. PNG, JPG, or WEBP. Max 8MB each.</p>
+        </div>
+      </div>
+      <button class="btn primary" type="submit">Save Settings</button>
+    </form>
+
+    <div class="table-wrap" style="margin-top: 28px;">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Status</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <tbody id="lead-table">
+          <tr>
+            <td colspan="4">Loading leads...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <script src="{{ url_for('static', filename='admin.js') }}"></script>
+</body>
+</html>

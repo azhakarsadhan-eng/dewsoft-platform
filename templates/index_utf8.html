@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DewSoft</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <header class="hero" id="home">
+    <nav class="nav">
+      <div class="brand">
+        <span class="brand-mark">NM</span>
+        <div>
+          <div class="brand-title">Success Journey Network</div>
+          <div class="brand-sub">Learn  Grow  Lead</div>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <a class="nav-link" href="#home">Home</a>
+        <a class="nav-link" href="#recruitment">Recruitment</a>
+        <a class="nav-link" href="#learning">Learning</a>
+        <a class="btn ghost" href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <div class="hero-grid">
+      <div class="hero-copy" data-reveal="left" data-delay="0.1">
+        <p class="eyebrow">Your Success Journey Starts Here</p>
+        <h1>Build a trusted network, earn with purpose, and grow with education-led success.</h1>
+        <p class="lead">A professional recruiting hub that captures leads, trains new partners, and connects them to the official organization platform.</p>
+        <div class="cta-row">
+          <button class="btn primary" data-open-modal>Join Now</button>
+          <a class="btn outline" href="#learning">Start Learning</a>
+        </div>
+        <div class="journey-steps">
+          <span class="step" data-reveal="up" data-delay="0.1">Idea</span>
+          <span class="step" data-reveal="up" data-delay="0.2">Plan</span>
+          <span class="step" data-reveal="up" data-delay="0.3">Work</span>
+          <span class="step" data-reveal="up" data-delay="0.4">Promotion</span>
+          <span class="step" data-reveal="up" data-delay="0.5">Success</span>
+        </div>
+      </div>
+      <div class="hero-card" data-reveal="right" data-delay="0.2">
+        <div class="card-title">Lead Momentum</div>
+        <div class="stat-grid">
+          <div>
+            <p>Weekly Leads</p>
+            <strong>128</strong>
+          </div>
+          <div>
+            <p>Follow Ups</p>
+            <strong>56</strong>
+          </div>
+          <div>
+            <p>Joined</p>
+            <strong>100+</strong>
+          </div>
+        </div>
+        <div class="meter">
+          <div class="meter-fill" style="width: 68%"></div>
+        </div>
+        <p class="muted">Growth confidence 68%</p>
+      </div>
+    </div>
+  </header>
+
+  <section id="recruitment" class="section">
+    <div class="section-header" data-reveal="up" data-delay="0.1">
+      <p class="eyebrow">Recruitment</p>
+      <h2>Capture new partners and follow up with confidence.</h2>
+      <p class="section-lead">Collect names and phone numbers to guide potential members through the opportunity.</p>
+    </div>
+    <div class="grid-2">
+      <div class="panel" data-reveal="up" data-delay="0.1">
+        <h3>Lead Capture</h3>
+        <form class="form" id="lead-form">
+          <label>
+            Full Name
+            <input type="text" name="name" placeholder="Enter full name" required />
+          </label>
+          <label>
+            Phone Number
+            <input type="tel" name="phone" placeholder="Enter phone number" required />
+          </label>
+          <button class="btn primary full" type="submit">Get Started</button>
+        </form>
+        <p class="muted">We will contact you soon after you submit your details.</p>
+      </div>
+      <div class="panel highlight" data-reveal="up" data-delay="0.2">
+        <h3>Why Join Our Team</h3>
+        <ul class="checklist">
+          <li>Mentorship and daily guidance</li>
+          <li>Skill development and leadership training</li>
+          <li>Flexible work model with supportive community</li>
+        </ul>
+        <button class="btn ghost" data-open-modal>Join Now</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="learning" class="section alt">
+    <div class="section-header" data-reveal="up" data-delay="0.1">
+      <p class="eyebrow">Learning</p>
+      <h2>Training tools that build confidence and skill.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="panel" data-reveal="up" data-delay="0.1">
+        <h3>Courses</h3>
+        <p>Structured modules to master presentations, product knowledge, and leadership.</p>
+        <div class="progress">
+          <div class="progress-bar" style="width: 62%"></div>
+        </div>
+      </div>
+      <div class="panel" data-reveal="up" data-delay="0.2">
+        <h3>E-books</h3>
+        <p>Downloadable guides for mindset, sales strategy, and communication.</p>
+        <div class="progress">
+          <div class="progress-bar" style="width: 46%"></div>
+        </div>
+      </div>
+      <div class="panel" data-reveal="up" data-delay="0.3">
+        <h3>Audio + Internship</h3>
+        <p>Listen on the go and apply for guided internships with senior mentors.</p>
+        <div class="progress">
+          <div class="progress-bar" style="width: 38%"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" class="section">
+    <div class="section-header" data-reveal="up" data-delay="0.1">
+      <p class="eyebrow">Gallery</p>
+      <h2>Motivation, education, and success stories.</h2>
+    </div>
+    <div class="gallery-wrap">
+      <div class="gallery-track" id="gallery-track">
+        <div class="poster-card">Poster 01</div>
+        <div class="poster-card">Poster 02</div>
+        <div class="poster-card">Poster 03</div>
+        <div class="poster-card">Poster 04</div>
+        <div class="poster-card">Poster 05</div>
+        <div class="poster-card">Poster 06</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section alt">
+    <div class="section-header" data-reveal="up" data-delay="0.1">
+      <p class="eyebrow">About</p>
+      <h2>Opportunity plus personal growth, designed for long-term success.</h2>
+    </div>
+    <div class="grid-2">
+      <div class="panel" data-reveal="up" data-delay="0.1">
+        <h3>Business Opportunity</h3>
+        <p>Build a strong team with consistent systems, training, and ethical guidance. We focus on sustainable growth and transparent leadership.</p>
+      </div>
+      <div class="panel" data-reveal="up" data-delay="0.2">
+        <h3>Skill Development</h3>
+        <p>Learn communication, marketing, and leadership skills that benefit both your business and your personal life.</p>
+      </div>
+      <div class="panel" data-reveal="up" data-delay="0.3">
+        <h3>Personal Growth</h3>
+        <p>Develop confidence, mindset, and resilience through daily coaching and community support.</p>
+      </div>
+      <div class="panel" data-reveal="up" data-delay="0.1">
+        <h3>Supportive Culture</h3>
+        <p>Join a positive, goal-oriented environment focused on helping every member progress.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section alt">
+    <div class="section-header" data-reveal="up" data-delay="0.1">
+      <p class="eyebrow">Contact</p>
+      <h2>Talk with a mentor before you begin.</h2>
+    </div>
+    <div class="grid-2">
+      <div class="panel" data-reveal="left" data-delay="0.1">
+        <h3>Direct Contact</h3>
+        <p class="contact-line"><strong>Phone:</strong> <span id="contact-phone">+91 90000 00000</span></p>
+        <p class="contact-line"><strong>Email:</strong> <span id="contact-email">support@successjourney.in</span></p>
+        <a class="btn ghost" id="contact-whatsapp" href="https://wa.me/919000000000" target="_blank" rel="noopener">WhatsApp Now</a>
+      </div>
+      <div class="panel" data-reveal="right" data-delay="0.2">
+        <h3>Request a Call Back</h3>
+        <form class="form" id="contact-form">
+          <label>
+            Your Name
+            <input type="text" name="name" placeholder="Enter your name" required />
+          </label>
+          <label>
+            Phone Number
+            <input type="tel" name="phone" placeholder="Enter phone number" required />
+          </label>
+          <label class="full">
+            Message
+            <textarea name="notes" rows="3" placeholder="Tell us what you want to know"></textarea>
+          </label>
+          <button class="btn primary full" type="submit">Send Request</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div>
+      <div class="brand-title">Success Journey Network</div>
+      <p>Professional recruitment & learning hub for network marketing leaders.</p>
+      <a class="footer-inline-link" id="official-link" href="https://example.com" target="_blank" rel="noopener">Learn more</a>
+    </div>
+    <div>
+      <p class="footer-title">Quick Links</p>
+      <a href="#recruitment">Join Now</a>
+      <a href="#learning">Start Learning</a>
+    </div>
+    <div>
+      <p class="footer-title">Support</p>
+      <p id="footer-email">support@successjourney.in</p>
+      <p id="footer-phone">+91 90000 00000</p>
+    </div>
+  </footer>
+
+  <div class="modal" data-modal aria-hidden="true">
+    <div class="modal-overlay" data-close-modal></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="join-title">
+      <button class="modal-close" data-close-modal aria-label="Close">&times;</button>
+      <p class="eyebrow">Join Now</p>
+      <h2 id="join-title">Complete your joining step</h2>
+      <p class="section-lead">Joining fee: <strong>&#8377;200</strong>. Pay securely via Razorpay to complete your joining.</p>
+      <button class="btn primary full" id="razorpay-button" type="button">Pay with Razorpay</button>
+      <p class="muted">After payment, our team will contact you for confirmation.</p>
+    </div>
+  </div>
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
