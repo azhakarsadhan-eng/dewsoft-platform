@@ -4,7 +4,8 @@ import json
 import urllib.request
 import os
 from uuid import uuid4
-from flask import Flask, jsonify, redirect, render_template, request, url_for
+from functools import wraps
+from flask import Flask, jsonify, redirect, render_template, request, url_for, Response
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.utils import secure_filename
 
@@ -29,6 +30,8 @@ RAZORPAY_AMOUNT = int(os.getenv("RAZORPAY_AMOUNT", "20000"))
 RAZORPAY_CURRENCY = os.getenv("RAZORPAY_CURRENCY", "INR")
 RAZORPAY_NAME = os.getenv("RAZORPAY_NAME", "Success Journey Network")
 RAZORPAY_DESCRIPTION = os.getenv("RAZORPAY_DESCRIPTION", "Joining fee")
+ADMIN_USER = os.getenv("ADMIN_USER", "admin")
+ADMIN_PASS = os.getenv("ADMIN_PASS", "admin123")
 
 _db = SQLAlchemy(app)
 
@@ -86,14 +89,38 @@ def init_db():
 init_db()
 
 
+def _check_auth(username, password):
+    return username == ADMIN_USER and password == ADMIN_PASS
+
+
+def _authenticate():
+    return Response(
+        "Authentication required",
+        401,
+        {"WWW-Authenticate": 'Basic realm="DewSoft Admin"'},
+    )
+
+
+def _requires_auth(fn):
+    @wraps(fn)
+    def wrapper(*args, **kwargs):
+        auth = request.authorization
+        if not auth or not _check_auth(auth.username, auth.password):
+            return _authenticate()
+        return fn(*args, **kwargs)
+
+    return wrapper
+
+
 @app.route("/")
 def home():
     return render_template("index_utf8.html")
 
 
 @app.route("/admin")
+@_requires_auth
 def admin():
-    return redirect("http://localhost:3000", code=302)
+    return render_template("admin.html")
 
 
 @app.route("/health")
