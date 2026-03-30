@@ -12,6 +12,8 @@ app = Flask(__name__)
 db_path = os.getenv("DATABASE_URL")
 if db_path and db_path.startswith("postgres://"):
     db_path = db_path.replace("postgres://", "postgresql://", 1)
+if db_path and db_path.startswith("postgresql://"):
+    db_path = db_path.replace("postgresql://", "postgresql+psycopg://", 1)
 if not db_path:
     os.makedirs(app.instance_path, exist_ok=True)
     db_file = os.path.join(app.instance_path, "platform.db")
