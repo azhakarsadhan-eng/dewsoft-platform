@@ -16,8 +16,12 @@ if db_path and db_path.startswith("postgres://"):
 if db_path and db_path.startswith("postgresql://"):
     db_path = db_path.replace("postgresql://", "postgresql+psycopg://", 1)
 if not db_path:
-    os.makedirs(app.instance_path, exist_ok=True)
-    db_file = os.path.join(app.instance_path, "platform.db")
+    # Vercel serverless filesystem is read-only except /tmp.
+    if os.getenv("VERCEL"):
+        db_file = "/tmp/platform.db"
+    else:
+        os.makedirs(app.instance_path, exist_ok=True)
+        db_file = os.path.join(app.instance_path, "platform.db")
     db_path = f"sqlite:///{db_file}"
 app.config["SQLALCHEMY_DATABASE_URI"] = db_path
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

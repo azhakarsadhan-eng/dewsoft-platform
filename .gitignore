@@ -11,6 +11,7 @@ instance/
 # Node
 admin-dashboard/node_modules/
 admin-dashboard/.npm-cache/
+admin-dashboard/data.db
 
 # OS
 .DS_Store
