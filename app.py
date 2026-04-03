@@ -296,6 +296,8 @@ def razorpay_order():
 
 @app.route("/api/upload", methods=["POST"])
 def upload():
+    if os.getenv("VERCEL"):
+        return jsonify({"error": "File upload is not supported on Vercel storage. Use poster image URLs instead."}), 400
     if "files" not in request.files:
         return jsonify({"error": "No files provided"}), 400
     files = request.files.getlist("files")
