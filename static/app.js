@@ -175,10 +175,20 @@ const footerEmail = document.querySelector('#footer-email');
 const posterGrid = document.querySelector('#poster-grid');
 const galleryTrack = document.querySelector('#gallery-track');
 const galleryFallback = galleryTrack
-  ? [...galleryTrack.querySelectorAll('.poster-card')].map((card, index) => ({
-      type: 'text',
-      text: card.textContent.trim() || `Poster ${index + 1}`,
-    }))
+  ? [...galleryTrack.querySelectorAll('.poster-card')].map((card, index) => {
+      const image = card.querySelector('img');
+      if (image && image.getAttribute('src')) {
+        return {
+          type: 'img',
+          src: image.getAttribute('src'),
+          alt: image.getAttribute('alt') || `Poster ${index + 1}`,
+        };
+      }
+      return {
+        type: 'text',
+        text: card.textContent.trim() || `Poster ${index + 1}`,
+      };
+    })
   : [];
 
 const renderPosterGrid = items => {
@@ -194,13 +204,25 @@ const renderPosterGrid = items => {
     .join('');
 };
 
+const normalizePosterUrl = value => {
+  const raw = String(value || '').trim().replaceAll('\\', '/');
+  if (!raw) return '';
+  if (raw.startsWith('http://') || raw.startsWith('https://')) return raw;
+  if (raw.startsWith('/static/')) return raw;
+  if (raw.startsWith('static/')) return `/${raw}`;
+  if (raw.startsWith('/posters/')) return `/static${raw}`;
+  if (raw.startsWith('posters/')) return `/static/${raw}`;
+  if (/\.(png|jpe?g|webp)$/i.test(raw)) return `/static/posters/${raw}`;
+  return '';
+};
+
 const renderGalleryTrack = posters => {
   if (!galleryTrack) return;
   const items = Array.isArray(posters) && posters.length ? posters : [];
   let cards = [];
   if (items.length) {
     cards = items
-      .map(url => url.trim())
+      .map(normalizePosterUrl)
       .filter(Boolean)
       .map((url, index) => ({
         type: 'img',
@@ -254,7 +276,7 @@ const applySettings = settings => {
     contactWhatsapp.href = settings.whatsapp;
   }
   if (Array.isArray(settings.posters) && posterGrid) {
-    const posters = settings.posters.map(url => url.trim()).filter(Boolean);
+    const posters = settings.posters.map(normalizePosterUrl).filter(Boolean);
     if (posters.length) {
       posterGrid.innerHTML = posters
         .map((url, index) => `<div class="poster-tile"><img src="${url}" alt="Poster ${index + 1}" loading="lazy" /></div>`)
