@@ -6,10 +6,8 @@
 };
 
 const leadTable = document.querySelector('#lead-table');
+const contactTable = document.querySelector('#contact-table');
 const refreshButton = document.querySelector('#refresh-data');
-const settingsForm = document.querySelector('#settings-form');
-const uploadZone = document.querySelector('#upload-zone');
-const posterFiles = document.querySelector('#poster-files');
 
 const formatDate = value => {
   if (!value) return '-';
@@ -60,120 +58,47 @@ const loadLeads = async () => {
     .join('');
 };
 
-const loadSettings = async () => {
-  if (!settingsForm) return;
-  const response = await fetch('/api/settings');
-  if (!response.ok) return;
-  const data = await response.json();
-  settingsForm.official_url.value = data.official_url || '';
-  settingsForm.phone.value = data.phone || '';
-  settingsForm.email.value = data.email || '';
-  settingsForm.whatsapp.value = data.whatsapp || '';
-  settingsForm.posters.value = Array.isArray(data.posters) ? data.posters.join(', ') : '';
-};
+const loadContacts = async () => {
+  const response = await fetch('/api/contacts');
+  if (!response.ok) throw new Error('Failed to load contacts');
+  const contacts = await response.json();
+  if (!contactTable) return;
 
-const saveSettings = async () => {
-  if (!settingsForm) return;
-  const payload = {
-    official_url: settingsForm.official_url.value.trim(),
-    phone: settingsForm.phone.value.trim(),
-    email: settingsForm.email.value.trim(),
-    whatsapp: settingsForm.whatsapp.value.trim(),
-    posters: settingsForm.posters.value
-      .split(',')
-      .map(item => item.trim())
-      .filter(Boolean),
-  };
-
-  const response = await fetch('/api/settings', {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  });
-
-  if (!response.ok) {
-    alert('Unable to save settings.');
+  if (!Array.isArray(contacts) || contacts.length === 0) {
+    contactTable.innerHTML = '<tr><td colspan="4">No contacts yet.</td></tr>';
     return;
   }
 
-  alert('Settings updated successfully.');
+  contactTable.innerHTML = contacts
+    .slice(0, 50)
+    .map(
+      contact => `
+        <tr>
+          <td>${contact.name || '-'}</td>
+          <td>${contact.phone || '-'}</td>
+          <td>${contact.message || '-'}</td>
+          <td>${formatDate(contact.created_at)}</td>
+        </tr>
+      `
+    )
+    .join('');
 };
-
-const appendPosterUrls = urls => {
-  if (!settingsForm || !Array.isArray(urls) || urls.length === 0) return;
-  const current = settingsForm.posters.value
-    .split(',')
-    .map(item => item.trim())
-    .filter(Boolean);
-  const updated = [...current, ...urls];
-  settingsForm.posters.value = updated.join(', ');
-};
-
-const uploadPosters = async files => {
-  const formData = new FormData();
-  Array.from(files).forEach(file => formData.append('files', file));
-  const response = await fetch('/api/upload', {
-    method: 'POST',
-    body: formData,
-  });
-
-  if (!response.ok) {
-    alert('Upload failed. Please try again.');
-    return;
-  }
-
-  const data = await response.json();
-  appendPosterUrls(data.urls || []);
-  await saveSettings();
-};
-
-if (uploadZone && posterFiles) {
-  uploadZone.addEventListener('click', () => posterFiles.click());
-
-  posterFiles.addEventListener('change', event => {
-    if (event.target.files?.length) {
-      uploadPosters(event.target.files);
-      event.target.value = '';
-    }
-  });
-
-  uploadZone.addEventListener('dragover', event => {
-    event.preventDefault();
-    uploadZone.classList.add('is-dragover');
-  });
-
-  uploadZone.addEventListener('dragleave', () => {
-    uploadZone.classList.remove('is-dragover');
-  });
-
-  uploadZone.addEventListener('drop', event => {
-    event.preventDefault();
-    uploadZone.classList.remove('is-dragover');
-    if (event.dataTransfer.files?.length) {
-      uploadPosters(event.dataTransfer.files);
-    }
-  });
-}
 
 const refreshAll = async () => {
   try {
-    await Promise.all([loadStats(), loadLeads(), loadSettings()]);
+    await Promise.all([loadStats(), loadLeads(), loadContacts()]);
   } catch (error) {
     if (leadTable) {
       leadTable.innerHTML = '<tr><td colspan="4">Unable to load data.</td></tr>';
+    }
+    if (contactTable) {
+      contactTable.innerHTML = '<tr><td colspan="4">Unable to load data.</td></tr>';
     }
   }
 };
 
 if (refreshButton) {
   refreshButton.addEventListener('click', refreshAll);
-}
-
-if (settingsForm) {
-  settingsForm.addEventListener('submit', event => {
-    event.preventDefault();
-    saveSettings();
-  });
 }
 
 refreshAll();

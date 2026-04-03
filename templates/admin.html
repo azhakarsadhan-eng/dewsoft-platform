@@ -48,41 +48,10 @@
     </div>
 
     <div class="section-header" style="margin-top: 28px;">
-      <p class="eyebrow">Site Settings</p>
-      <h2>Update posters and contact info.</h2>
-      <p class="section-lead">These changes appear instantly on the main website.</p>
+      <p class="eyebrow">Leads</p>
+      <h2>Latest lead capture entries.</h2>
+      <p class="section-lead">Read-only view for quick monitoring.</p>
     </div>
-
-    <form class="panel form" id="settings-form">
-      <label>
-        Official Website URL
-        <input type="url" name="official_url" placeholder="https://example.com" autocomplete="url" />
-      </label>
-      <label>
-        Phone Number
-        <input type="text" name="phone" placeholder="+91 90000 00000" autocomplete="tel" />
-      </label>
-      <label>
-        Support Email
-        <input type="email" name="email" placeholder="support@successjourney.in" autocomplete="email" />
-      </label>
-      <label>
-        WhatsApp Link
-        <input type="url" name="whatsapp" placeholder="https://wa.me/919000000000" autocomplete="url" />
-      </label>
-      <label class="full">
-        Poster Image URLs (comma separated)
-        <textarea name="posters" rows="3" placeholder="https://.../poster1.jpg, https://.../poster2.jpg" autocomplete="off"></textarea>
-      </label>
-      <div class="upload-zone" id="upload-zone">
-        <input type="file" id="poster-files" accept="image/*" multiple />
-        <div>
-          <p class="upload-title">Drag & drop posters here</p>
-          <p class="muted">Or click to upload. PNG, JPG, or WEBP. Max 8MB each.</p>
-        </div>
-      </div>
-      <button class="btn primary" type="submit">Save Settings</button>
-    </form>
 
     <div class="table-wrap" style="margin-top: 28px;">
       <table class="table">
@@ -97,6 +66,30 @@
         <tbody id="lead-table">
           <tr>
             <td colspan="4">Loading leads...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-header" style="margin-top: 28px;">
+      <p class="eyebrow">Contacts</p>
+      <h2>Callback requests and messages.</h2>
+      <p class="section-lead">Read-only view of contact messages.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Message</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <tbody id="contact-table">
+          <tr>
+            <td colspan="4">Loading contacts...</td>
           </tr>
         </tbody>
       </table>
